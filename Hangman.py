@@ -5,11 +5,13 @@ import time
 print("\nWelcome to Hangman game by Popa Alexandru\n")
 name = input("Enter your name: ")
 print("Hello " + name + "! Best of Luck!\n")
-time.sleep(1)
-print("The game is about to start!"
-      "\nYou can guess 4 wrong letters, at the 5th, you hang."
-      "\nLet's play Hangman!\n")
-time.sleep(4)
+time.sleep(1.5)
+print("The game is about to start!")
+time.sleep(1.5)
+print("You can guess 4 wrong letters, at the 5th, you hang.")
+time.sleep(1.5)
+print("Let's play Hangman!\n")
+time.sleep(1.5)
 print("Choosing a word from our vocabulary", end="")
 time.sleep(1)
 print(".", end="")
