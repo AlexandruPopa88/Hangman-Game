@@ -4,12 +4,20 @@ import time
 # Initial Steps to invite in the game:
 print("\nWelcome to Hangman game by Popa Alexandru\n")
 name = input("Enter your name: ")
-print("Hello " + name + "! Best of Luck!")
+print("Hello " + name + "! Best of Luck!\n")
 time.sleep(1)
 print("The game is about to start!"
       "\nYou can guess 4 wrong letters, at the 5th, you hang."
-      "\nLet's play Hangman!")
+      "\nLet's play Hangman!\n")
 time.sleep(4)
+print("Choosing a word from our vocabulary", end="")
+time.sleep(1)
+print(".", end="")
+time.sleep(1)
+print(".", end="")
+time.sleep(1)
+print(".")
+time.sleep(1)
 
 
 # The parameters we require to execute the game:
@@ -23,9 +31,14 @@ def main():
     global wrong_guesses
     global length
     global play_game
-    words_to_guess = ["january", "border", "image", "film", "promise", "kids",
-                      "lungs", "doll", "rhyme", "damage", "plants"]
-    word = random.choice(words_to_guess)
+
+    def loadWords():
+        # inFile: file
+        inFile = open("words.txt").read().splitlines()
+        # returns 1 word at random from a file of 83667 words.
+        return random.choice(inFile)
+
+    word = loadWords().lower()
     original_word = word
     length = len(word)
     count = 0
