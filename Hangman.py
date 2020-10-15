@@ -36,7 +36,8 @@ def main():
 
     def loadWords():
         # inFile: file
-        inFile = open("words.txt").read().splitlines()
+        with open("words.txt") as inFile:
+            inFile = inFile.read().splitlines()
         # returns 1 word at random from a file of 83667 words.
         return random.choice(inFile)
 
