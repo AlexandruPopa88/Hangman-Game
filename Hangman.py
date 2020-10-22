@@ -2,24 +2,23 @@ import random
 import time
 
 # Initial Steps to invite in the game:
-print("\nWelcome to Hangman game by Popa Alexandru\n")
+print("\nWelcome to Hangman game by Popa Alexandru!\n")
 name = input("Enter your name: ")
-print("Hello " + name + "! Best of Luck!\n")
+print(f"Hello {name.capitalize()}! The game is about to start! \nBest of Luck!")
 time.sleep(1.5)
-print("The game is about to start!")
+print()
 time.sleep(1.5)
 print("You can guess 4 wrong letters, at the 5th, you hang.")
 time.sleep(1.5)
 print("Let's play Hangman!\n")
 time.sleep(1.5)
-print("Choosing a word from our vocabulary", end="")
-time.sleep(1)
-print(".", end="")
-time.sleep(1)
-print(".", end="")
-time.sleep(1)
-print(".")
-time.sleep(1)
+print("Choosing a word from our vocabulary ", end="")
+for _ in range(10):
+    time.sleep(0.21)
+    print(".", end="")
+time.sleep(0.21)
+print(" done\n")
+time.sleep(0.5)
 
 
 # The parameters we require to execute the game:
@@ -34,14 +33,14 @@ def main():
     global length
     global play_game
 
-    def loadWords():
-        # inFile: file
-        with open("words.txt") as inFile:
-            inFile = inFile.read().splitlines()
+    def select_word():
+        # words: list of words from file
+        with open("words.txt") as words:
+            words = words.read().splitlines()
         # returns 1 word at random from a file of 83667 words.
-        return random.choice(inFile)
+        return random.choice(words).lower()
 
-    word = loadWords().lower()
+    word = select_word()
     original_word = word
     length = len(word)
     count = 0
