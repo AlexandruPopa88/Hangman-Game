@@ -1,5 +1,7 @@
 import random
 import time
+import json
+import requests
 
 # Initial Steps to invite in the game:
 print("\nWelcome to Hangman game by Popa Alexandru!\n")
@@ -26,8 +28,9 @@ def main():
     global count
     global discovered
     global display
-    global original_word
     global word
+    global original_word
+    global definition
     global already_guessed
     global wrong_guesses
     global length
@@ -49,6 +52,20 @@ def main():
     already_guessed = []
     wrong_guesses = []
     play_game = ""
+
+    # Oxford API v2 for getting word definition
+    app_id = "42a80a9a"
+    app_key = "e2218819d04b0f8fe096343fe73253d8"
+    language = "en-gb"
+    word_id = original_word
+    fields = 'definitions'
+    strictMatch = 'false'
+    url = 'https://od-api.oxforddictionaries.com:443/api/v2/entries/' + language + '/' + word_id.lower() + '?fields=' + fields + '&strictMatch=' + strictMatch;
+    r = requests.get(url, headers={"app_id": app_id, "app_key": app_key})
+    try:
+        definition = r.json()["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"][0]
+    except:
+        pass
 
 # A loop to re-execute the game when the first round ends:
 def play_loop():
@@ -156,10 +173,18 @@ def hangman():
                   "__|__\n")
             print("Wrong guess. You are hanged!!!\n")
             print("The word was:"," ".join(list(original_word)))
+            try:
+                print(f"Oxford Dictionaries defines {original_word} = {definition}")
+            except:
+                pass
             play_loop()
 
     if word == '_' * length:
         print("Congratulations! You have guessed the word correctly!")
+        try:
+            print(f"Oxford Dictionaries defines {original_word} = {definition}")
+        except:
+            pass
         play_loop()
 
     elif count != max_guesses:
