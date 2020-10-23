@@ -38,7 +38,7 @@ def main():
 
     def select_word():
         # words: list of words from file
-        with open("words.txt") as words:
+        with open("words.txt", encoding= "utf-8") as words:
             words = words.read().splitlines()
         # returns 1 word at random from a file of 83667 words.
         return random.choice(words).lower()
@@ -74,6 +74,7 @@ def play_loop():
     while play_game not in ["y", "n","Y","N"]:
         play_game = input("Do You want to play again? y = yes, n = no \n")
     if play_game == "y":
+        print("\n")
         main()
     elif play_game == "n":
         print("Thank you for playing! Don't be a stranger, now! ;)")
@@ -89,7 +90,7 @@ def hangman():
     global wrong_guesses
     global play_game
     max_guesses = 5
-    guess = input("This is the Hangman Word: " + display + " Guess a letter: \n")
+    guess = input("This is the Hangman Word: " + display + "\nGuess a letter: ")
     guess = guess.strip().lower()
     if len(guess) == 0 or len(guess) >= 2 or guess.isdigit():
         print("Invalid Input, Try a letter\n")
@@ -174,7 +175,7 @@ def hangman():
             print("Wrong guess. You are hanged!!!\n")
             print("The word was:"," ".join(list(original_word)))
             try:
-                print(f"Oxford Dictionaries defines {original_word} = {definition}")
+                print(f"Oxford Dictionaries defines '{original_word}' as '{definition}'")
             except:
                 pass
             play_loop()
@@ -182,7 +183,7 @@ def hangman():
     if word == '_' * length:
         print("Congratulations! You have guessed the word correctly!")
         try:
-            print(f"Oxford Dictionaries defines {original_word} = {definition}")
+            print(f"Oxford Dictionaries defines '{original_word}' as '{definition}'")
         except:
             pass
         play_loop()
